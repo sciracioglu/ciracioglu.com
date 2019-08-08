@@ -7,21 +7,17 @@ use App\Kategori;
 
 class KategoriController extends Controller
 {
-
     public function index()
     {
         $kategoriler = Kategori::get();
-        
-        return view('kategori',compact('kategoriler'));
+
+        return view('kategori', compact('kategoriler'));
     }
-    
 
     public function store()
     {
-        request()->validate(['title' => 'required']);
-        Kategori::create(request('title'));
-        
+        Kategori::create(request()->validate(['title' => 'required']));
+
         return redirect('/kategori');
     }
-    
 }

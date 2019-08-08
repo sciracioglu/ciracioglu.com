@@ -15,5 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::get('/kategori','KategoriController@index');
-Route::post('/kategori','KategoriController@store');
+
+Auth::routes();
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::post('/yazi','YaziController@store');
+    Route::get('/yazi/create','YaziController@create');
+
+    Route::post('/kategori','KategoriController@store');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+
+Route::get('/yazi','YaziController@index');
+Route::get('/yazi/{yazi}','YaziController@show');

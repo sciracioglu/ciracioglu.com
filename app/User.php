@@ -36,4 +36,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function yazilar(){
+        return $this->hasMany(Yazi::class,'owner_id');
+    }
 }
